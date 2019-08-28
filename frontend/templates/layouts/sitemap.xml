@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {% for doc in docs|sort(attribute='url') if not doc.sitemap.enabled is sameas false %}
+  {% if not '/documentation/examples/previews' in doc.pod_path %}
   <url>
     <loc>{{ doc.url }}</loc>
     {% if doc.modified %}
     <lastmod>{{ doc.modified|date("%Y-%M-%D") }}</lastmod>
     {% endif %}
   </url>
+  {% endif %}
   {% endfor %}
 </urlset>
